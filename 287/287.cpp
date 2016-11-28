@@ -9,7 +9,8 @@ using namespace std;
 class Solution {
 public:
     static int findDuplicate(const vector<int>& nums) {
-        static constexpr  int K = 32;
+        /*
+        static constexpr int K = 32;
         vector<size_t> indices(K);
         vector<int> numbers(K);
 
@@ -27,6 +28,26 @@ public:
             if (numbers[i - 1] == numbers[i]) {
                 return numbers[i];
             }
+        }
+        */
+
+        for (size_t i = 0; i < 10; ++i) {
+            int index1 = rand() % nums.size();
+            int index2 = rand() % nums.size();
+            if (index1 != index2 && nums[index1] == nums[index2]) {
+                return nums[index1];
+            }
+        }
+
+        int i = nums.size() - 1;
+        int j = nums.size() - 1;
+        do {
+            i = nums[i] - 1;
+            j = nums[nums[j] - 1] - 1;
+        } while (nums[i] != nums[j]);
+
+        if (i != j) {
+            return nums[i];
         }
 
         int t = nums.back();
